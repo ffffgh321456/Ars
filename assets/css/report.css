@@ -1,0 +1,878 @@
+/* ==========================================================================
+   «Память рода» — страница семейного отчёта
+   ========================================================================== */
+
+:root {
+  --paper: #fffdf8;
+  --paper-2: #f7f1e6;
+  --ink: #191d1a;
+  --ink-soft: #4d544e;
+  --muted: #858a81;
+  --line: rgba(24, 32, 29, 0.18);
+  --gold: #b4883f;
+  --gold-bright: #d8ae63;
+  --dark: #101714;
+  --dark-2: #1a231e;
+  --serif: Georgia, "Times New Roman", "PT Serif", serif;
+  --document: "Times New Roman", "PT Serif", Georgia, serif;
+  --sans: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #cfc7b8;
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.35), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(125, 43, 43, 0.08), transparent 55%),
+    #cfc7b8;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Панель управления ---------- */
+
+.report-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px clamp(16px, 3vw, 32px);
+  background: rgba(11, 16, 14, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fffdf8;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.report-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 248, 0.66);
+  transition: color 0.2s var(--ease);
+}
+
+.report-back:hover {
+  color: var(--gold-bright);
+}
+
+.report-toolbar__title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  line-height: 1.1;
+}
+
+.report-toolbar__title span {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.report-toolbar__title strong {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.report-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  background: transparent;
+  color: rgba(255, 253, 248, 0.84);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.tool-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-bright);
+}
+
+.tool-btn--gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+
+.tool-btn--gold:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  color: var(--dark);
+}
+
+.tool-btn--ghost {
+  border-color: transparent;
+  color: rgba(255, 253, 248, 0.5);
+}
+
+.tool-btn--ghost:hover {
+  border-color: transparent;
+  color: var(--white, #fffdf8);
+}
+
+/* ---------- Рабочая область ---------- */
+
+.report-wrap {
+  padding: clamp(24px, 4vw, 52px) 16px clamp(40px, 6vw, 72px);
+}
+
+.report-note {
+  width: min(100%, 840px);
+  margin: 0 auto 18px;
+  padding: 14px 18px;
+  background: rgba(255, 253, 248, 0.78);
+  border-left: 3px solid var(--gold);
+  box-shadow: 0 10px 30px -24px rgba(16, 23, 20, 0.6);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.report-note a {
+  border-bottom: 1px solid var(--gold);
+  color: var(--ink);
+}
+
+.paper {
+  width: min(100%, 840px);
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 72px) clamp(26px, 7vw, 84px);
+  background: var(--paper);
+  box-shadow: 0 40px 90px -40px rgba(16, 23, 20, 0.55);
+  font-family: var(--document);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* ---------- Титульный лист ---------- */
+
+.doc-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 760px;
+  padding: 24px 0 22px;
+  text-align: center;
+  border-top: 2px solid var(--gold);
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-cover__kicker {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.doc-cover__star {
+  margin-top: 34px;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.doc-cover h1 {
+  max-width: 580px;
+  margin-top: 26px;
+  font-family: var(--serif);
+  font-size: clamp(32px, 5.2vw, 50px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.doc-cover__sub {
+  max-width: 480px;
+  margin-top: 20px;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.doc-cover__rule {
+  width: 72px;
+  height: 2px;
+  margin: 30px 0;
+  background: var(--gold);
+}
+
+.doc-cover__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  width: 100%;
+  max-width: 480px;
+  margin-top: auto;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-cover__meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.doc-cover__meta dt {
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.doc-cover__meta dd {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.doc-cover__foot {
+  max-width: 520px;
+  margin-top: 24px;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Содержание ---------- */
+
+.doc-toc {
+  padding-top: 10px;
+}
+
+.doc-toc h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.doc-toc ol {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.doc-toc li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.doc-toc li span:first-child {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.doc-toc li span:last-child {
+  margin-left: auto;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Секции документа ---------- */
+
+.doc-section {
+  padding-top: 44px;
+}
+
+.doc-section > h2 {
+  margin-bottom: 18px;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.doc-section h3 {
+  margin: 26px 0 8px;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.doc-section p {
+  margin-bottom: 12px;
+  text-align: justify;
+  text-indent: 24px;
+  hyphens: auto;
+}
+
+.doc-section p:last-child {
+  margin-bottom: 0;
+}
+
+.doc-eyebrow {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ---------- Карточка героя ---------- */
+
+.doc-person {
+  padding-top: 46px;
+  border-top: 1px solid var(--line);
+}
+
+.doc-person__head {
+  padding-bottom: 20px;
+}
+
+.doc-person__head h2 {
+  margin-top: 8px;
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.8vw, 34px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.doc-person__meta {
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.doc-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 8px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.doc-fact {
+  padding: 13px 15px;
+  background: var(--paper);
+}
+
+.doc-fact dt {
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.doc-fact dd {
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.doc-timeline {
+  position: relative;
+  margin-top: 10px;
+  padding-left: 24px;
+}
+
+.doc-timeline::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: 1px;
+  background: var(--line);
+}
+
+.doc-timeline li {
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.doc-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.doc-timeline li::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -24px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--paper);
+  background: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.doc-timeline__date {
+  display: block;
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.doc-timeline h4 {
+  margin-top: 2px;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.doc-timeline p {
+  margin-top: 3px;
+  text-align: left;
+  text-indent: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.doc-awards {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.doc-awards li {
+  position: relative;
+  padding: 8px 12px 8px 32px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.doc-awards li::before {
+  content: "★";
+  position: absolute;
+  left: 12px;
+  top: 7px;
+  font-size: 12px;
+  color: var(--gold);
+}
+
+.doc-sources {
+  margin-top: 8px;
+}
+
+.doc-sources li {
+  position: relative;
+  padding: 7px 0 7px 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.doc-sources li::before {
+  content: counter(doc-source) ".";
+  counter-increment: doc-source;
+  position: absolute;
+  left: 0;
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.doc-sources {
+  counter-reset: doc-source;
+}
+
+.doc-note {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-left: 2px solid var(--gold);
+  background: rgba(180, 136, 63, 0.1);
+  font-family: var(--sans);
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ---------- Заключение и финал ---------- */
+
+.doc-conclusion {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 2px solid var(--gold);
+}
+
+.doc-conclusion blockquote {
+  margin: 20px 0;
+  padding: 6px 0 6px 24px;
+  border-left: 2px solid var(--gold);
+}
+
+.doc-conclusion blockquote p {
+  text-indent: 0;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.doc-signature {
+  margin-top: 48px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.doc-signature strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  color: var(--gold);
+}
+
+.report-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+  padding: 0 16px 40px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(24, 32, 29, 0.54);
+  text-align: center;
+}
+
+.report-footer a {
+  border-bottom: 1px solid rgba(24, 32, 29, 0.3);
+}
+
+.report-footer a:hover {
+  color: var(--ink);
+  border-color: var(--gold);
+}
+
+.js .paper {
+  animation: paper-in 0.5s var(--ease);
+}
+
+@keyframes paper-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ---------- Адаптивность ---------- */
+
+@media (max-width: 860px) {
+  .report-toolbar {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  .report-toolbar__title {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .report-toolbar__actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .tool-btn {
+    flex: 1;
+  }
+
+  .report-toolbar__actions .tool-btn--ghost {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .report-wrap {
+    padding: 16px 8px 32px;
+  }
+
+  .paper {
+    padding: 30px 20px;
+    font-size: 14px;
+  }
+
+  .doc-cover {
+    min-height: 0;
+  }
+
+  .doc-cover__meta {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .doc-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-person__head h2 {
+    font-size: 25px;
+  }
+
+  .doc-section p {
+    text-align: left;
+  }
+
+  .report-back {
+    display: none;
+  }
+}
+
+/* ---------- Пустой отчёт ---------- */
+
+.paper .doc-empty {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.doc-empty h1 {
+  margin: 14px 0 16px;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.08;
+}
+
+.doc-empty > p:not(.doc-eyebrow) {
+  max-width: 440px;
+  margin: 0 auto 24px;
+  color: #4a4a4a;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.doc-empty__star {
+  color: var(--gold, #b4883f);
+  font-size: 34px;
+}
+
+.doc-empty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.doc-empty__actions .tool-btn {
+  border-color: var(--line, #d9d3c5);
+  color: var(--ink, #1c1b18);
+}
+
+.doc-empty__actions .tool-btn--gold {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #fffdf8;
+}
+
+.doc-empty__actions .tool-btn--ghost {
+  border-color: var(--line, #d9d3c5);
+  color: var(--ink, #1c1b18);
+}
+
+.tool-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- Печать ---------- */
+
+@page {
+  size: A4;
+  margin: 18mm 16mm 20mm;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  body::before,
+  .report-toolbar,
+  .report-footer,
+  .report-note {
+    display: none !important;
+  }
+
+  .report-wrap {
+    padding: 0;
+  }
+
+  .paper {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background: #fff;
+    font-size: 12.5pt;
+    line-height: 1.55;
+  }
+
+  .doc-cover {
+    min-height: 0;
+    padding-top: 22mm;
+    break-after: page;
+  }
+
+  .doc-toc {
+    break-after: page;
+  }
+
+  .doc-person,
+  .doc-conclusion,
+  .doc-sources-final {
+    break-before: page;
+  }
+
+  .doc-section p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .doc-timeline li,
+  .doc-facts,
+  .doc-awards li,
+  .doc-person__head {
+    break-inside: avoid;
+  }
+
+  .doc-cover h1 {
+    font-size: 30pt;
+  }
+
+  .doc-person__head h2 {
+    font-size: 20pt;
+  }
+
+  .doc-section > h2 {
+    font-size: 17pt;
+  }
+
+  .doc-toc h2 {
+    font-size: 18pt;
+  }
+
+  .js .paper {
+    animation: none;
+  }
+}
