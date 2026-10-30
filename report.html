@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Семейный отчёт — Память рода</title>
+  <meta name="description" content="Семейный отчёт о боевом пути родственников — участников Великой Отечественной войны.">
+  <meta name="theme-color" content="#101714">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101714'/%3E%3Cpath d='M32 9l6 17h18l-14.5 11 5.5 18L32 44 17 55l5.5-18L8 26h18z' fill='%23d8ae63'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/report.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body class="report-page">
+  <header class="report-toolbar">
+    <a class="report-back" href="index.html#search">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      К архиву
+    </a>
+
+    <div class="report-toolbar__title">
+      <span>Память рода</span>
+      <strong>Семейный отчёт</strong>
+    </div>
+
+    <div class="report-toolbar__actions">
+      <a class="tool-btn tool-btn--ghost" href="index.html#search">Изменить состав</a>
+      <button class="tool-btn" type="button" id="print-btn">Печать / PDF</button>
+      <button class="tool-btn tool-btn--gold" type="button" id="word-btn">Скачать Word</button>
+    </div>
+  </header>
+
+  <main class="report-wrap">
+    <p class="report-note" id="report-note" hidden></p>
+    <article class="paper" id="paper" aria-busy="true"></article>
+  </main>
+
+  <footer class="report-footer">
+    <p>Документ сформирован в сервисе «Память рода» на основе вашего личного архива.</p>
+    <a href="index.html#search">Вернуться к архиву</a>
+    <a href="search.html">Найти в военных архивах</a>
+    <a href="example.html">Пример исследования</a>
+    <a href="index.html#about">О нас</a>
+    <a href="docs/Великая_Отечественная_война_в_моей_семье.docx" download>Скачать пример отчёта</a>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/personal.js"></script>
+  <script src="assets/js/report.js"></script>
+</body>
+</html>

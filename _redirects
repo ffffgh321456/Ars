@@ -1,0 +1,4 @@
+# Правила для ручной публикации (Netlify Drop), где netlify.toml
+# может не применяться: адреса /api/* ведут к серверным функциям.
+/api/heroes  /.netlify/functions/heroes  200
+/api/hero    /.netlify/functions/hero    200

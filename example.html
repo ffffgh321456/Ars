@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пример исследования — Память рода</title>
+  <meta name="description" content="Пример того, что можно найти с помощью сервиса «Память рода»: боевой путь, награды и семейная хроника двух прадедов — участников Великой Отечественной войны.">
+  <meta name="theme-color" content="#101714">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101714'/%3E%3Cpath d='M32 9l6 17h18l-14.5 11 5.5 18L32 44 17 55l5.5-18L8 26h18z' fill='%23d8ae63'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip-link" href="#example-cards">Перейти к примеру</a>
+
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Память рода — на главную">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="34" height="34">
+            <path d="M20 3.5l4.6 11.9h12.7l-10.3 8.3 3.9 12.6L20 28.6l-10.9 7.7 3.9-12.6L2.7 15.4h12.7z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand__text">
+          <strong>Память</strong>
+          <span>рода</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="index.html">Главная</a>
+        <a href="search.html">Военные архивы</a>
+        <a href="index.html#search">Мой архив</a>
+        <a href="example.html" aria-current="page">Пример</a>
+        <a href="report.html">Отчёт</a>
+        <a href="index.html#about">О нас</a>
+      </nav>
+
+      <a class="header__cta" href="search.html">
+        <span>Начать свой поиск</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="archives-hero" aria-labelledby="example-title">
+      <div class="archives-hero__bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow">
+          <span class="ribbon" aria-hidden="true"></span>
+          Пример результата · 1941—1945
+        </p>
+        <h1 id="example-title">Одна семья —<br><em>две судьбы</em></h1>
+        <p class="archives-hero__lead">
+          Этот сервис вырос из исследовательской работы о двух прадедах. С его помощью
+          мы собрали документы, восстановили боевой путь и оформили семейный отчёт.
+          Ниже — пример того, что может найти каждая семья.
+        </p>
+
+        <div class="query-form__actions">
+          <a class="btn btn--gold" href="docs/Великая_Отечественная_война_в_моей_семье.docx" download>
+            Скачать пример отчёта
+          </a>
+          <a class="btn btn--ghost" href="search.html">
+            Начать свой поиск
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="found" aria-labelledby="found-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">01 / Что удалось найти</p>
+          <h2 id="found-title">Четыре записи<br>семейного архива</h2>
+          <p class="section__lead">
+            Два участника войны и две женщины, чьи судьбы связаны с фронтом и тылом.
+            Раскройте карточку, чтобы прочитать биографию, боевой путь и источники.
+          </p>
+        </div>
+
+        <div class="cards" id="example-cards"></div>
+
+        <noscript>
+          <p class="noscript">Для просмотра карточек нужен JavaScript. Включите его в настройках браузера.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <section class="section section--chronicle" id="example-chronicle-section" aria-labelledby="example-chronicle-title">
+      <div class="container">
+        <div class="section__head section__head--light reveal">
+          <p class="section__num">02 / Хроника</p>
+          <h2 id="example-chronicle-title">История семьи —<br>история страны</h2>
+          <p class="section__lead">Восемь дат, которые связывают две семейные судьбы с историей Великой Отечественной войны.</p>
+        </div>
+
+        <ol class="chronicle" id="example-chronicle"></ol>
+
+        <div class="chronicle__quote reveal">
+          <p>«Из всего, что я узнала, я поняла — мои прадедушки настоящие герои. Мы должны это помнить, знать и не забывать».</p>
+          <cite>Из исследовательской работы «Великая Отечественная война в моей семье»</cite>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conclusion" aria-labelledby="conclusion-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">03 / Вывод</p>
+          <h2 id="conclusion-title">Программа помогла<br>собрать историю семьи</h2>
+        </div>
+
+        <div class="example-story reveal">
+          <p>
+            Работая с «Памятью рода», я нашёл информацию о своих прадедах: Иване Илларионовиче
+            Филонове и Ефиме Исаковиче Подгорбунских. По открытым документам и семейным материалам
+            удалось восстановить их боевой путь, награды и места сражений.
+          </p>
+          <p>
+            Сервис не заменил архив и не придумал факты за меня. Он помог не потерять найденное:
+            собрал записи в одном месте, подсказал, где искать дальше, и превратил разрозненные
+            сведения в семейный документ, который можно сохранить и передать детям.
+          </p>
+          <p>
+            Этот пример — не исключение. Любая семья может пройти тот же путь: начать с фамилии,
+            проверить её в военных архивах, сохранить документы и собрать свой отчёт. Главное —
+            не откладывать разговор о семейной памяти.
+          </p>
+        </div>
+
+        <div class="example-conclusion reveal">
+          <h3>Повторите этот путь со своей семьёй</h3>
+          <p>Введите фамилию родственника и посмотрите, какие документы сохранились в открытых архивах. Найденное можно сразу добавить в личный архив.</p>
+          <a class="btn btn--primary" href="search.html">Начать поиск</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="sources" aria-labelledby="sources-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">04 / Источники</p>
+          <h2 id="sources-title">Где искать документы</h2>
+          <p class="section__lead">Официальные банки данных Министерства обороны России и народные проекты памяти. Поиск в них бесплатный.</p>
+        </div>
+
+        <div class="sources" id="example-sources"></div>
+
+        <p class="disclaimer reveal">
+          <strong>Осторожно с копиями.</strong> В открытых архивах могут встречаться ошибки и разночтения в написании фамилий.
+          Сверяйте несколько документов и сохраняйте номера дел и ссылки на источники.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="brand brand--footer" href="index.html">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="30" height="30">
+              <path d="M20 3.5l4.6 11.9h12.7l-10.3 8.3 3.9 12.6L20 28.6l-10.9 7.7 3.9-12.6L2.7 15.4h12.7z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand__text"><strong>Память</strong><span>рода</span></span>
+        </a>
+        <p>Пример семейного исследования, собранного с помощью сервиса «Память рода».</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Навигация в подвале">
+        <a href="index.html">Главная</a>
+        <a href="search.html">Военные архивы</a>
+        <a href="index.html#search">Мой архив</a>
+        <a href="index.html#how">Как это работает</a>
+        <a href="example.html">Пример исследования</a>
+        <a href="report.html">Отчёт</a>
+        <a href="index.html#about">О нас</a>
+      </nav>
+
+      <div class="footer__bottom">
+        <p>© 2026 «Память рода». Сделано с уважением к семейной памяти.</p>
+        <p class="footer__quote">Никто не забыт, ничто не забыто.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/example.js"></script>
+</body>
+</html>

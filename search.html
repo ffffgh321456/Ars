@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поиск в военных архивах — Память рода</title>
+  <meta name="description" content="Поиск родственников — участников Великой Отечественной войны в открытых военных архивах: «Память народа», «Подвиг народа», ОБД «Мемориал» и других. Составьте запрос и сохраните найденное в личный архив.">
+  <meta name="theme-color" content="#101714">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101714'/%3E%3Cpath d='M32 9l6 17h18l-14.5 11 5.5 18L32 44 17 55l5.5-18L8 26h18z' fill='%23d8ae63'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip-link" href="#archive-form">Перейти к поиску</a>
+
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Память рода — на главную">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="34" height="34">
+            <path d="M20 3.5l4.6 11.9h12.7l-10.3 8.3 3.9 12.6L20 28.6l-10.9 7.7 3.9-12.6L2.7 15.4h12.7z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand__text">
+          <strong>Память</strong>
+          <span>рода</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="index.html">Главная</a>
+        <a href="search.html" aria-current="page">Военные архивы</a>
+        <a href="index.html#search">Мой архив</a>
+        <a href="example.html">Пример</a>
+        <a href="report.html">Отчёт</a>
+        <a href="index.html#about">О нас</a>
+      </nav>
+
+      <a class="header__cta" href="#my-archive">
+        <span>Личный архив</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="archives-hero" aria-labelledby="archives-title">
+      <div class="archives-hero__bg" aria-hidden="true"></div>
+      <div class="container">
+        <p class="eyebrow">
+          <span class="ribbon" aria-hidden="true"></span>
+          Военные архивы · 1941—1945
+        </p>
+        <h1 id="archives-title">Найдите своего героя<br><em>в военных архивах</em></h1>
+        <p class="archives-hero__lead">
+          Введите то, что знаете о родственнике. Сервис соберёт запросы к открытым банкам
+          документов Министерства обороны и подскажет, где искать дальше.
+        </p>
+
+        <form class="query-form" id="archive-form" autocomplete="off">
+          <div class="query-form__grid">
+            <label class="field">
+              <span>Фамилия <b>*</b></span>
+              <input id="q-last" name="lastName" type="text" placeholder="Филонов" required>
+            </label>
+            <label class="field">
+              <span>Имя</span>
+              <input id="q-first" name="firstName" type="text" placeholder="Иван">
+            </label>
+            <label class="field">
+              <span>Отчество</span>
+              <input id="q-middle" name="middleName" type="text" placeholder="Илларионович">
+            </label>
+            <label class="field">
+              <span>Год рождения</span>
+              <input id="q-birth" name="birthDate" type="text" inputmode="numeric" maxlength="4" placeholder="1923">
+            </label>
+            <label class="field field--wide">
+              <span>Место рождения</span>
+              <input id="q-place" name="birthPlace" type="text" placeholder="село Ново-Тарасовичи">
+            </label>
+            <label class="field">
+              <span>Звание</span>
+              <input id="q-rank" name="rank" type="text" placeholder="лейтенант">
+            </label>
+            <label class="field">
+              <span>Награда</span>
+              <input id="q-award" name="award" type="text" placeholder="За отвагу">
+            </label>
+          </div>
+
+          <div class="query-form__actions">
+            <button class="btn btn--primary" type="submit">Найти сведения</button>
+            <button class="btn btn--ghost" type="button" id="download-query">Скачать запрос</button>
+            <span class="query-form__hint">Поиск по фамилии идёт в открытой базе «Дорога памяти». Личный архив остаётся в браузере.</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="lookup" aria-labelledby="lookup-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">01 / Что удалось найти</p>
+          <h2 id="lookup-title">Сведения из открытой базы<br>«Дорога памяти»</h2>
+          <p class="section__lead">
+            Введите фамилию родственника — сервис покажет найденные записи текстом: имя, годы
+            жизни, звание, награды и место службы. Сначала идут совпадения из вашего личного
+            архива, затем — записи музея «Дорога памяти».
+          </p>
+        </div>
+
+        <div class="lookup" id="lookup-panel">
+          <div class="lookup__status" id="lookup-status" role="status" aria-live="polite">
+            <p>Введите фамилию в форме выше и нажмите «Найти сведения».</p>
+          </div>
+
+          <div class="lookup__error" id="lookup-error" role="alert" hidden></div>
+
+          <div class="lookup__personal" id="lookup-personal" hidden>
+            <p class="lookup__label">В вашем личном архиве</p>
+            <div class="lookup__personal-list" id="lookup-personal-list"></div>
+          </div>
+
+          <div class="lookup__results" id="lookup-results"></div>
+
+          <div class="lookup__empty" id="lookup-empty" hidden>
+            <span aria-hidden="true">☆</span>
+            <h3>По этой фамилии записей не нашлось</h3>
+            <p>
+              Попробуйте другой вариант написания: «Филонов» и «Филанов», «Подгорбунских»
+              и «Подгорбунский». Или продолжите поиск в архивах ниже.
+            </p>
+            <a class="btn btn--outline btn--small" href="#results-links">Перейти к архивам</a>
+          </div>
+
+          <div class="lookup__foot" id="lookup-foot" hidden>
+            <p>Показаны первые записи. Полная выдача и документы — на сайте музея.</p>
+            <a class="btn btn--dark btn--small" id="lookup-all" href="https://1418museum.ru/" target="_blank" rel="noopener">Открыть все результаты</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results-links" aria-labelledby="links-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">02 / Продолжить поиск</p>
+          <h2 id="links-title">Продолжить поиск в архивах</h2>
+          <p class="section__lead">
+            Открывайте архивы по очереди и сверяйте документы. Ссылки уже содержат введённые
+            данные; если архив их не подставил — скопируйте запрос и вставьте в поле поиска.
+          </p>
+        </div>
+
+        <div class="query-summary reveal" id="query-summary" aria-live="polite"></div>
+
+        <div class="archives-grid" id="archives-grid"></div>
+
+        <div class="copy-panel reveal">
+          <div>
+            <p class="copy-panel__label">Запрос для ручного поиска</p>
+            <code id="query-text">Фамилия</code>
+          </div>
+          <button class="btn btn--dark btn--small" type="button" id="copy-query">Скопировать</button>
+        </div>
+
+        <div class="search-cta reveal">
+          <div>
+            <h3>Нашли документ?</h3>
+            <p>Добавьте запись в личный архив — она появится в поиске, хронике и семейном отчёте.</p>
+          </div>
+          <button class="btn btn--gold" type="button" id="open-add">Добавить в мой архив</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="my-archive" aria-labelledby="my-archive-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">03 / Личный архив</p>
+          <h2 id="my-archive-title">Мой архив</h2>
+          <p class="section__lead">
+            Записи о ваших родственниках. Они хранятся только в этом браузере.
+            Архив можно выгрузить в файл и перенести на другое устройство.
+          </p>
+        </div>
+
+        <div class="personal-toolbar reveal">
+          <p class="result-count" id="personal-count" aria-live="polite"></p>
+          <div class="personal-toolbar__actions">
+            <button class="btn btn--outline btn--small" type="button" id="export-archive">Скачать архив</button>
+            <label class="btn btn--outline btn--small" for="import-archive">Загрузить архив</label>
+            <input class="visually-hidden" id="import-archive" type="file" accept="application/json,.json">
+            <button class="btn btn--outline btn--small" type="button" id="clear-archive">Очистить</button>
+          </div>
+        </div>
+
+        <div class="personal-list" id="personal-list"></div>
+
+        <div class="personal-empty" id="personal-empty" hidden>
+          <span aria-hidden="true">★</span>
+          <h3>Пока здесь пусто</h3>
+          <p>Найдите документ в архиве, а затем добавьте родственника — с биографией, наградами и ссылками на источники.</p>
+        </div>
+
+        <details class="add-panel" id="add-panel">
+          <summary>
+            <span>Добавить запись в личный архив</span>
+            <small>Фамилия и имя обязательны</small>
+          </summary>
+
+          <form class="add-form" id="person-form" autocomplete="off">
+            <div class="add-form__grid">
+              <label class="field">
+                <span>Фамилия <b>*</b></span>
+                <input id="p-last" name="lastName" type="text" required>
+              </label>
+              <label class="field">
+                <span>Имя <b>*</b></span>
+                <input id="p-first" name="firstName" type="text" required>
+              </label>
+              <label class="field">
+                <span>Отчество</span>
+                <input id="p-middle" name="patronymic" type="text">
+              </label>
+              <label class="field">
+                <span>Год рождения</span>
+                <input id="p-birth" name="birth" type="text" inputmode="numeric" maxlength="4">
+              </label>
+              <label class="field field--wide">
+                <span>Место рождения</span>
+                <input id="p-place" name="birthplace" type="text">
+              </label>
+              <label class="field">
+                <span>Статус</span>
+                <select id="p-category" name="category">
+                  <option value="veteran">Участник Великой Отечественной войны</option>
+                  <option value="homefront">Труженик тыла</option>
+                  <option value="unknown">Сведения уточняются</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Звание</span>
+                <input id="p-rank" name="rank" type="text" placeholder="рядовой">
+              </label>
+              <label class="field">
+                <span>Должность</span>
+                <input id="p-position" name="position" type="text" placeholder="стрелок">
+              </label>
+              <label class="field field--wide">
+                <span>Фронты</span>
+                <input id="p-fronts" name="fronts" type="text" placeholder="Западный фронт, 1-й Белорусский фронт">
+              </label>
+              <label class="field field--wide">
+                <span>Награды</span>
+                <input id="p-awards" name="awards" type="text" placeholder="Медаль «За отвагу», орден Красной Звезды">
+              </label>
+              <label class="field field--wide">
+                <span>Краткое описание</span>
+                <textarea id="p-summary" name="summary" rows="2" placeholder="Что известно о боевом пути"></textarea>
+              </label>
+              <label class="field field--wide">
+                <span>Биография</span>
+                <textarea id="p-bio" name="bio" rows="3" placeholder="Абзацы биографии — можно вставить текст из документа"></textarea>
+              </label>
+              <label class="field field--wide">
+                <span>Источники и ссылки</span>
+                <textarea id="p-sources" name="sources" rows="2" placeholder="Память народа, номер дела, ссылка на наградной лист"></textarea>
+              </label>
+            </div>
+
+            <p class="add-form__hint">
+              Разделяйте несколько наград, фронтов и источников запятыми или с новой строки.
+            </p>
+
+            <div class="add-form__actions">
+              <button class="btn btn--primary" type="submit">Сохранить в мой архив</button>
+              <button class="btn btn--outline" type="button" id="reset-person">Очистить форму</button>
+              <span class="add-form__status" id="person-status" role="status"></span>
+            </div>
+          </form>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="how-search" aria-labelledby="how-search-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__num">04 / Как искать</p>
+          <h2 id="how-search-title">Пять шагов от фамилии<br>до документа</h2>
+          <p class="section__lead">Поиск в архивах — это работа с вариантами написания и перекрёстная проверка. Вот порядок, который экономит время.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">01</span>
+            <h3>Соберите факты</h3>
+            <p>Запишите всё, что помнит семья: фамилию, имя, отчество, год и место рождения, где жил до войны, кем работал, когда призван.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">02</span>
+            <h3>Проверьте варианты</h3>
+            <p>Фамилии в документах писали на слух: «Подгорбунских» и «Подгорбунский», «Филонов» и «Филанов». Ищите с разницей в год рождения ±1.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">03</span>
+            <h3>Начните с «Памяти народа»</h3>
+            <p>Там собраны наградные листы, донесения о потерях и боевой путь. Затем проверьте «Подвиг народа» и ОБД «Мемориал».</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">04</span>
+            <h3>Сверьте части и даты</h3>
+            <p>Номер дивизии, полка и армии — главный ключ. По справочнику боевого состава можно понять, где воевал родственник и за что награждён.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num" aria-hidden="true">05</span>
+            <h3>Сохраните документ</h3>
+            <p>Запишите номер дела, фонда, описи и листа, добавьте ссылку. Без этих данных находку трудно подтвердить через годы.</p>
+          </li>
+        </ol>
+
+        <div class="how-note reveal">
+          <span class="how-note__mark" aria-hidden="true">★</span>
+          <p><strong>Что важно:</strong> открытые архивы содержат ошибки распознавания и разночтения. Один и тот же человек может быть записан по-разному. Сверяйте минимум два документа и не публикуйте непроверенные данные как окончательные.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="brand brand--footer" href="index.html">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="30" height="30">
+              <path d="M20 3.5l4.6 11.9h12.7l-10.3 8.3 3.9 12.6L20 28.6l-10.9 7.7 3.9-12.6L2.7 15.4h12.7z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand__text"><strong>Память</strong><span>рода</span></span>
+        </a>
+        <p>Семейный архив и поиск родственников — участников Великой Отечественной войны.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Навигация в подвале">
+        <a href="index.html">Главная</a>
+        <a href="search.html">Военные архивы</a>
+        <a href="index.html#search">Мой архив</a>
+        <a href="index.html#how">Как это работает</a>
+        <a href="example.html">Пример исследования</a>
+        <a href="report.html">Отчёт</a>
+        <a href="index.html#about">О нас</a>
+      </nav>
+
+      <div class="footer__bottom">
+        <p>© 2026 «Память рода». Сделано с уважением к семейной памяти.</p>
+        <p class="footer__quote">Никто не забыт, ничто не забыто.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/personal.js"></script>
+  <script src="assets/js/archives.js"></script>
+  <script src="assets/js/archive-search.js"></script>
+  <script src="netlify/functions/lib/heroes-core.js"></script>
+  <script src="assets/js/hero-search.js"></script>
+</body>
+</html>
